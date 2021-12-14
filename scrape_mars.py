@@ -11,6 +11,8 @@ def scrape():
 
     url = "https://redplanetscience.com/"
     browser.visit(url)
+    html = browser.html
+    soup = bsoup(html, 'html.parser')
     news_title = soup.find('div', class_='content_title').text
     news_p = soup.find('div', class_='article_teaser_body').text
     mars_data_return['news_title']=news_title
@@ -32,6 +34,7 @@ def scrape():
     htmltables = pd.read_html(html)
     mars_data_df = htmltables[1]
     mars_data_df.columns=['Measurement', 'Value']
+    mars_data_df.set_index('Measurement',inplace=True)
     mars_html = mars_data_df.to_html()
     mars_html = mars_html.replace('\n','')
     mars_data_return['data_table']=mars_html

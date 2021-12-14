@@ -12,11 +12,11 @@ collection = db.mars_facts
 def scrape():
     mars = scrape_mars.scrape()
     db.mars_facts.insert_one(mars)
-    return "Data Scraped"
+    return redirect("/", code=302)
 
 @app.route('/')
 def home():
-    mars = list(db.mars_facts.find())
+    mars = db.mars_facts.find_one()
     print(mars)
     return render_template("index.html", mars=mars)
 

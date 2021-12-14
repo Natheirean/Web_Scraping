@@ -11,34 +11,57 @@
     <title>Mission to Mars</title>
   </head>
   <body>
-          <div class="container">
+      <div class="container">
               <div class="jumbotron">
                   <h1 align="center">Mission to Mars</h1>
                   <p align="center">
-                  <a href="#" role="button">Scrape New Data</a>
+                  <a href="/scrape" role="button">Scrape New Data</a>
                   </p>
               </div>
-              <div class="page-header">
-                  <h1 align="left">Latest Mars News</h1>
+              <div class="col-md-12">
+                  <h1 align="left"><strong>Latest Mars News</strong></h1>
               </div>
+          <div class="col-md-12">
+            <ul>
+              <h5>{{mars.news_title}}</h5>
+            </ul>
+            <ul>
+              <p>{{mars.news_paragraph}}</p>
+            </ul>
           </div>
-          
-          {% for data in mars %}
-          <div class="container-fluid">
-            <h2>{{data.news_title}}</h2>
-            <p>{{data.news_paragraph}}</p>
+          <div class="col-md-12">
+            <h4 class="heading"><strong>Feature Image</strong></h4>
+            <div class="col-md-12">
+              <ul>
+                <img src={{mars.feature_image}}></img>
+              </ul>
+            </div>
           </div>
-          <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-7">
-                    <h3>Featured Image</h3>
-                    
-                    <img src="{{data.feature_image}}" alt="featured image" style="width: 80%;">
-
-                </div>
+          <div class="col-md-12">
+            <h4 class="heading"><strong>Information on Mars</strong></h4>
+            <div class="col-md-12">
+              <ul>
+                {% autoescape off %}
+                {{mars.data_table}}
+                {% endautoescape %}
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <h4 class="heading"><strong>All Hemispheres</strong></h4>
+            <div class="col-md-12">
+              <ul>
+                {% for sphere in mars.hemisphere_imgs %}
+                <h3><strong>{{sphere.title}}</strong></h3>
+                <img src={{sphere.img_url}}></img>
+                {% endfor %}
+              </ul>
             </div>
           </div>
 
+
+      </div>
+          
 
   </body>
 </html>
